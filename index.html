@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html>
-	<head>
-	
-	</head>
-	<body>
-			<br>
-			<p>Enter First Number:
-			<input id="input1" /></p></br>
-			<p>Enter Second Number:
-			<input id="input2" /></p></br>
-			 
 
-			<button id="Add" onclick="myFunction()">Add</button></br>
-			
-			<p id="idOne">
-			<p id="idTwo">
-			<p id="answer">
+<head>
 
-			</p>
+</head>
 
-		
-		<script> function myFunction() {
-    	var num1 = parseFloat(document.getElementById("input1").value);
-    	var num2 = parseFloat(document.getElementById("input2").value);
-    	document.getElementById("answer").innerHTML = num1 + num2;
-  		}
-  		</script>
-	</body>
+<body>
+	<br>
+	<p>Enter First Number:
+		<input id="input1" />
+	</p></br>
+	<p>Enter Second Number:
+		<input id="input2" />
+	</p></br>
+
+	<button id="Add" onclick="myFunction()">Add</button></br>
+
+	<p id="idOne">
+	<p id="idTwo">
+	<p id="answer">
+
+	</p>
+
+	<script>
+		function myFunction() {
+			var num1 = parseFloat(document.getElementById("input1").value);
+			var num2 = parseFloat(document.getElementById("input2").value);
+			document.getElementById("answer").innerHTML = num1 + num2;
+		}
+	</script>
+</body>
+
 </html>
