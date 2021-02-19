@@ -2,7 +2,7 @@
 <html>
 
 <head>
-
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -24,9 +24,14 @@
 
 	<script>
 		function myFunction() {
-			var num1 = parseFloat(document.getElementById("input1").value);
-			var num2 = parseFloat(document.getElementById("input2").value);
-			document.getElementById("answer").innerHTML = num1 + num2;
+			var a = parseFloat(document.getElementById("input1").value);
+			var b = parseFloat(document.getElementById("input2").value);
+			// document.getElementById("answer").innerHTML = num1 + num2;
+
+			axios.post('/topla', { a: a, b: b }).then(function (response) {
+				console.log(response);
+				document.getElementById("answer").innerHTML = response.data.payload.c;
+			})
 		}
 	</script>
 </body>
