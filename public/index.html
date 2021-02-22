@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+	<br>
+	<p>Enter First Number:
+		<input id="input1" />
+	</p></br>
+	<p>Enter Second Number:
+		<input id="input2" />
+	</p></br>
+
+	<button id="Add" onclick="myFunction()">Add</button></br>
+
+	<p id="idOne">
+	<p id="idTwo">
+	<p id="answer">
+
+	</p>
+
+	<script>
+		function myFunction() {
+			var a = parseFloat(document.getElementById("input1").value);
+			var b = parseFloat(document.getElementById("input2").value);
+			// document.getElementById("answer").innerHTML = num1 + num2;
+
+			axios.post('/topla', { a: a, b: b }).then(function (response) {
+				console.log(response);
+				document.getElementById("answer").innerHTML = response.data.payload.c;
+			})
+		}
+	</script>
+</body>
+
+</html>
