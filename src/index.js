@@ -2,10 +2,22 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+const { PythonShell } = require('python-shell');
+
+let options = {
+    mode: 'text',
+    pythonPath: "C:/Users/macro/anaconda3/python.exe",
+    pythonOptions: ['-u'], // get print results in real-time
+    scriptPath: './src',
+    args: ['value1', 'value2', 'value3']
+};
+
 app.use(express.static('public'));
 app.use(express.json());
 
-const deneme = (req, res, next)=>{
+
+
+const deneme = (req, res, next) => {
     const { a, b } = req.body;
 
     if (!a || !b) {
@@ -14,6 +26,18 @@ const deneme = (req, res, next)=>{
         return next();
     }
 }
+
+
+app.post("/run", (req, res) => {
+    const { a, b } = req.body;
+    PythonShell.run('topla.py', {...options, args: [a, b]}, function (err, results) {
+        if (err) {
+            return res.send(err);
+        }
+        console.log('results: %j', results);
+        return res.send({ ok: true, payload: results });
+    });
+})
 
 
 app.post("/topla", [deneme], async (req, res) => {
@@ -32,3 +56,5 @@ app.post("/topla", [deneme], async (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
+
+console.log("SOOOOOOOOOOOOOOOOOOOOOOON")
