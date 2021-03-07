@@ -3,10 +3,11 @@ const app = express()
 const port = 3000
 
 const { PythonShell } = require('python-shell');
+const convict = require('convict');
 
 let options = {
     mode: 'text',
-    pythonPath: "C:/Users/macro/anaconda3/python.exe",
+    pythonPath: '/config/config.js',
     pythonOptions: ['-u'], // get print results in real-time
     scriptPath: './src',
     args: ['value1', 'value2', 'value3']
@@ -30,7 +31,7 @@ const deneme = (req, res, next) => {
 
 app.post("/run", (req, res) => {
     const { a, b } = req.body;
-    PythonShell.run('topla.py', {...options, args: [a, b]}, function (err, results) {
+    PythonShell.run('/topla.py', {...options, args: [a, b]}, function (err, results) {
         if (err) {
             return res.send(err);
         }
