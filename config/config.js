@@ -1,6 +1,7 @@
 
 const convict = require('convict');
 // const { env } = require('yargs');
+require('dotenv').config()
 
 //define a schema
 var config = convict({
@@ -18,7 +19,7 @@ var config = convict({
     pythonPath: {
         format: String,
         // default: '/usr/bin/python', // Bu seninki .env dosyasından vericez
-        default: "C:/Users/macro/anaconda3/python.exe",
+        default: process.env.pythonPath,  //"C:/Users/macro/anaconda3/python.exe",
     },
 
     // env: {
