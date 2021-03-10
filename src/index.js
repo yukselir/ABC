@@ -3,11 +3,11 @@ const app = express()
 const port = 3000
 
 const { PythonShell } = require('python-shell');
-const convict = require('convict');
+const config = require("../config/config");
 
 let options = {
     mode: 'text',
-    pythonPath: '/config/config.js',
+    pythonPath: config.get("pythonPath"),
     pythonOptions: ['-u'], // get print results in real-time
     scriptPath: './src',
     args: ['value1', 'value2', 'value3']
