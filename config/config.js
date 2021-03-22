@@ -19,7 +19,7 @@ var config = convict({
     pythonPath: {
         format: String,
         // default: '/usr/bin/python', // Bu seninki .env dosyasından vericez
-        default: process.env.pythonPath,  //"C:/Users/macro/anaconda3/python.exe",
+        default: process.env.pythonPath,
     },
 
     // env: {
