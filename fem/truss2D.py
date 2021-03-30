@@ -1,3 +1,4 @@
+import json
 import numpy as np
 from NodesFile import TrussNode2D, nodes
 from ElementsFile import TrussElement2D, elements
@@ -73,9 +74,9 @@ for id, elm in elements.items():
         for j in range(4):  # j-> 0, 1, 2, 3
             cv_i = cv[i]
             cv_j = cv[j]
-            Ks[cv_i, cv_j] += Ks[cv_i, cv_j] + Ke[i, j]
+            Ks[cv_i, cv_j] += Ke[i, j]
 
-# print("System Stiffness Matrix:")
+#print("System Stiffness Matrix:")
 # print(Ks)
 
 for id, node in nodes.items():
@@ -108,14 +109,14 @@ RHS = Ks @ us
 # print("RHS")
 # print(RHS)
 
-import json
 
-dictionary ={  
-  "us": us,  
-  "ps": RHS.tolist()
+dictionary = {
+    "ks": Ks.tolist(),
+    "us": us,
+    "ps": RHS.tolist()
 }
 
 # dictionary = {"a" : 1 ,"b" : 2}
 
-json_object = json.dumps(dictionary)  
-print(json_object) 
+json_object = json.dumps(dictionary)
+print(json_object)
