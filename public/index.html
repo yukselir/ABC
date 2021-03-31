@@ -1,56 +1,49 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	</head>
 
-<head>
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-</head>
+	<body>
+		<div id="app">
+			<label for="fname">h:</label>
+			<input type="text" v-model="h" /><br /><br />
+			<label for="fname">dLx:</label>
+			<input type="text" v-model="dLx" /><br /><br />
+			<label for="fname">N:</label>
+			<input type="text" v-model="N" /><br /><br />
+			<input type="submit" value="Submit" @click="Solve" />
+		</div>
 
-<body>
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data: function () {
+					return {
+						h: 1.5,
+						dLx: 1.0,
+						N: 2,
+						X: [1, 4, 5, 7],
+						Y: [5, -3, 5, 7],
+					};
+				},
+				methods: {
+					Solve: function () {
+						var { h, dLx, N } = this;
 
-	<div id="app">
-		<label for="fname">h:</label>
-		<input type="text" v-model="h"><br><br>
-		<label for="fname">dLx:</label>
-		<input type="text" v-model="dLx"><br><br>
-		<label for="fname">N:</label>
-		<input type="text" v-model="N"><br><br>
-		<input type="submit" value="Submit" @click="Solve">
-	</div>
+						axios.post('/truss2D/solve', { h, dLx, N }).then(function (res) {
+							console.log(res.data);
+						});
+					},
+				},
 
-
-	<script>
-
-		var app = new Vue({
-			el: '#app',
-			data: function () {
-				return {
-					h: 1.5,
-					dLx: 1.0,
-					N: 2,
-					X : [1,4,5,7],
-					Y : [5,-3,5,7],
-				}
-			},
-			methods: {
-				Solve: function () {
-
-					var { h, dLx, N } = this;
-
-					axios.post("/truss2D/solve", { h, dLx, N }).then(function (res) {
-						console.log(res.data);
-					})
-				}
-			},
-
-			watch : {
-				h : function (n, o) {
-					console.log("h:", n)
-				}
-			}
-		})
-	</script>
-
-</body>
-
+				watch: {
+					h: function (n, o) {
+						console.log('h:', n);
+					},
+				},
+			});
+		</script>
+	</body>
 </html>
