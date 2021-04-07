@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<link rel="stylesheet" href="truss.css" />
+	</head>
+
+	<body>
+		<div id="container1">
+			<div>
+				<p id="p2">X Y rX rY</p>
+				<h1>Node Table</h1>
+				<p>
+					ID_1: <input id="NodeInput_X_1" size="5" />
+					<input id="NodeInput_Y_1" size="5" />
+					<input id="NodeInput_restX_1" size="5" />
+					<input id="NodeInput_restY_1" size="5" />
+				</p>
+				<p>
+					ID_2: <input id="NodeInput_X_2" size="5" />
+					<input id="NodeInput_Y_2" size="5" />
+					<input id="NodeInput_restX_2" size="5" />
+					<input id="NodeInput_restY_2" size="5" />
+				</p>
+				<p>
+					ID_3: <input id="NodeInput_restX_3" size="5" />
+					<input id="NodeInput_X_3" size="5" />
+					<input id="NodeInput_restX_3" size="5" />
+					<input id="NodeInput_restY_3" size="5" />
+				</p>
+				<p>
+					ID_4: <input id="NodeInput_X_4" size="5" />
+					<input id="NodeInput_Y_4" size="5" />
+					<input id="NodeInput_restX_4" size="5" />
+					<input id="NodeInput_restY_4" size="5" />
+				</p>
+				<p>
+					ID_5: <input id="NodeInput_X_5" size="5" />
+					<input id="NodeInput_Y_5" size="5" />
+					<input id="NodeInput_restX_5" size="5" />
+					<input id="NodeInput_restY_5" size="5" />
+				</p>
+
+				<p id="idOne"></p>
+				<p id="idTwo"></p>
+				<p id="answer"></p>
+			</div>
+		</div>
+		<div id="container2">
+			<div>
+				<h2>Element Table</h2>
+				<p id="p1">ni nj EA Lx Ly</p>
+				<p>
+					ID_1: <input id="ElmInp1_ni" size="5" />
+					<input id="ElmInp1_nj" size="5" />
+					<input id="ElmInp1_EA" size="5" />
+					<input id="ElmInp1_Lx" size="5" />
+					<input id="ElmInp1_Ly" size="5" />
+				</p>
+				<p>
+					ID_2: <input id="ElmInp2_ni" size="5" />
+					<input id="ElmInp2_nj" size="5" />
+					<input id="ElmInp2_EA" size="5" />
+					<input id="ElmInp2_Lx" size="5" />
+					<input id="ElmInp2_Ly" size="5" />
+				</p>
+				<p>
+					ID_3: <input id="ElmInp3_ni" size="5" />
+					<input id="ElmInp3_nj" size="5" />
+					<input id="ElmInp3_EA" size="5" />
+					<input id="ElmInp3_Lx" size="5" />
+					<input id="ElmInp3_Ly" size="5" />
+				</p>
+				<p>
+					ID_4: <input id="ElmInp4_ni" size="5" />
+					<input id="ElmInp4_nj" size="5" />
+					<input id="ElmInp4_EA" size="5" />
+					<input id="ElmInp4_Lx" size="5" />
+					<input id="ElmInp4_Ly" size="5" />
+				</p>
+				<p>
+					ID_5: <input id="ElmInp5_ni" size="5" />
+					<input id="ElmInp5_nj" size="5" />
+					<input id="ElmInp5_EA" size="5" />
+					<input id="ElmInp5_Lx" size="5" />
+					<input id="ElmInp5_Ly" size="5" />
+				</p>
+				<p>
+					ID_6: <input id="ElmInp6_ni" size="5" />
+					<input id="ElmInp6_nj" size="5" />
+					<input id="ElmInp6_EA" size="5" />
+					<input id="ElmInp6_Lx" size="5" />
+					<input id="ElmInp6_Ly" size="5" />
+				</p>
+				<p>
+					ID_7: <input id="ElmInp7_ni" size="5" />
+					<input id="ElmInp7_nj" size="5" />
+					<input id="ElmInp7_EA" size="5" />
+					<input id="ElmInp7_Lx" size="5" />
+					<input id="ElmInp7_Ly" size="5" />
+				</p>
+
+				<p id="idOne"></p>
+				<p id="idTwo"></p>
+				<p id="answer"></p>
+			</div>
+		</div>
+		<div id="container4">
+			<div>
+				<h2></h2>
+				<a href="#" class="button" onclick="myFunction()">Show Result</a>
+				<p></p>
+
+				<p id="idOne"></p>
+				<p id="idTwo"></p>
+				<p id="answer"></p>
+			</div>
+		</div>
+		<div id="container3">
+			<div>
+				<h3>Result</h3>
+			</div>
+		</div>
+
+		<script>
+			function myFunction() {
+				var node1x = parseFloat(document.getElementById('NodeInput_X_1').value);
+				var node1y = parseFloat(document.getElementById('NodeInput_Y_1').value);
+				var node1rx = parseFloat(
+					document.getElementById('NodeInput_restX_1').value
+				);
+				var node1ry = parseFloat(
+					document.getElementById('NodeInput_restY_1').value
+				);
+
+				var node2x = parseFloat(document.getElementById('NodeInput_X_2').value);
+				var node2y = parseFloat(document.getElementById('NodeInput_Y_2').value);
+				var node2rx = parseFloat(
+					document.getElementById('NodeInput_restX_2').value
+				);
+				var node2ry = parseFloat(
+					document.getElementById('NodeInput_restY_2').value
+				);
+
+				var node3x = parseFloat(document.getElementById('NodeInput_X_3').value);
+				var node3y = parseFloat(document.getElementById('NodeInput_Y_3').value);
+				var node3rx = parseFloat(
+					document.getElementById('NodeInput_restX_3').value
+				);
+				var node3ry = parseFloat(
+					document.getElementById('NodeInput_restY_3').value
+				);
+
+				var node4x = parseFloat(document.getElementById('NodeInput_X_4').value);
+				var node4y = parseFloat(document.getElementById('NodeInput_Y_4').value);
+				var node4rx = parseFloat(
+					document.getElementById('NodeInput_restX_4').value
+				);
+				var node4ry = parseFloat(
+					document.getElementById('NodeInput_restY_4').value
+				);
+
+				var node5x = parseFloat(document.getElementById('NodeInput_X_5').value);
+				var node5y = parseFloat(document.getElementById('NodeInput_Y_5').value);
+				var node5rx = parseFloat(
+					document.getElementById('NodeInput_restX_5').value
+				);
+				var node5ry = parseFloat(
+					document.getElementById('NodeInput_restY_5').value
+				);
+
+				var Elm1ni = parseFloat(document.getElementById('ElmInp1_ni').value);
+				var Elm1nj = parseFloat(document.getElementById('ElmInp1_nj').value);
+				var Elm1EA = parseFloat(document.getElementById('ElmInp1_EA').value);
+				var Elm1Lx = parseFloat(document.getElementById('ElmInp1_Lx').value);
+				var Elm1Ly = parseFloat(document.getElementById('ElmInp1_Ly').value);
+
+				var Elm2ni = parseFloat(document.getElementById('ElmInp2_ni').value);
+				var Elm2nj = parseFloat(document.getElementById('ElmInp2_nj').value);
+				var Elm2EA = parseFloat(document.getElementById('ElmInp2_EA').value);
+				var Elm2Lx = parseFloat(document.getElementById('ElmInp2_Lx').value);
+				var Elm2Ly = parseFloat(document.getElementById('ElmInp2_Ly').value);
+
+				var Elm3ni = parseFloat(document.getElementById('ElmInp3_ni').value);
+				var Elm3nj = parseFloat(document.getElementById('ElmInp3_nj').value);
+				var Elm3EA = parseFloat(document.getElementById('ElmInp3_EA').value);
+				var Elm3Lx = parseFloat(document.getElementById('ElmInp3_Lx').value);
+				var Elm3Ly = parseFloat(document.getElementById('ElmInp3_Ly').value);
+
+				var Elm4ni = parseFloat(document.getElementById('ElmInp4_ni').value);
+				var Elm4nj = parseFloat(document.getElementById('ElmInp4_nj').value);
+				var Elm4EA = parseFloat(document.getElementById('ElmInp4_EA').value);
+				var Elm4Lx = parseFloat(document.getElementById('ElmInp4_Lx').value);
+				var Elm4Ly = parseFloat(document.getElementById('ElmInp4_Ly').value);
+
+				var Elm5ni = parseFloat(document.getElementById('ElmInp5_ni').value);
+				var Elm5nj = parseFloat(document.getElementById('ElmInp5_nj').value);
+				var Elm5EA = parseFloat(document.getElementById('ElmInp5_EA').value);
+				var Elm5Lx = parseFloat(document.getElementById('ElmInp5_Lx').value);
+				var Elm5Ly = parseFloat(document.getElementById('ElmInp5_Ly').value);
+
+				var Elm6ni = parseFloat(document.getElementById('ElmInp6_ni').value);
+				var Elm6nj = parseFloat(document.getElementById('ElmInp6_nj').value);
+				var Elm6EA = parseFloat(document.getElementById('ElmInp6_EA').value);
+				var Elm6Lx = parseFloat(document.getElementById('ElmInp6_Lx').value);
+				var Elm6Ly = parseFloat(document.getElementById('ElmInp6_Ly').value);
+
+				var Elm7ni = parseFloat(document.getElementById('ElmInp7_ni').value);
+				var Elm7nj = parseFloat(document.getElementById('ElmInp7_nj').value);
+				var Elm7EA = parseFloat(document.getElementById('ElmInp7_EA').value);
+				var Elm7Lx = parseFloat(document.getElementById('ElmInp7_Lx').value);
+				var Elm7Ly = parseFloat(document.getElementById('ElmInp7_Ly').value);
+
+				// document.getElementById("answer").innerHTML = num1 + num2;
+
+				axios
+					.post('/truss2D', {
+						node1x: node1x,
+						node1y: node1y,
+						node1rx: node1rx,
+						node1ry: node1ry,
+						node2x: node2x,
+						node2y: node2y,
+						node2rx: node2rx,
+						node2ry: node2ry,
+						node3x: node3x,
+						node3y: node3y,
+						node3rx: node3rx,
+						node3ry: node3ry,
+						node4x: node4x,
+						node4y: node4y,
+						node4rx: node4rx,
+						node4ry: node4ry,
+						node5x: node5x,
+						node5y: node5y,
+						node5rx: node5rx,
+						node5ry: node5ry,
+
+						Elm1ni: Elm1ni,
+						Elm1nj: Elm1nj,
+						Elm1EA: Elm1EA,
+						Elm1Lx: Elm1Lx,
+						Elm1Ly: Elm1Ly,
+
+						Elm2ni: Elm2ni,
+						Elm2nj: Elm2nj,
+						Elm2EA: Elm2EA,
+						Elm2Lx: Elm2Lx,
+						Elm2Ly: Elm2Ly,
+
+						Elm3ni: Elm3ni,
+						Elm3nj: Elm3nj,
+						Elm3EA: Elm3EA,
+						Elm3Lx: Elm3Lx,
+						Elm3Ly: Elm3Ly,
+
+						Elm4ni: Elm4ni,
+						Elm4nj: Elm4nj,
+						Elm4EA: Elm4EA,
+						Elm4Lx: Elm4Lx,
+						Elm4Ly: Elm4Ly,
+
+						Elm5ni: Elm5ni,
+						Elm5nj: Elm5nj,
+						Elm5EA: Elm5EA,
+						Elm5Lx: Elm5Lx,
+						Elm5Ly: Elm5Ly,
+
+						Elm6ni: Elm6ni,
+						Elm6nj: Elm6nj,
+						Elm6EA: Elm6EA,
+						Elm6Lx: Elm6Lx,
+						Elm6Ly: Elm6Ly,
+
+						Elm7ni: Elm7ni,
+						Elm7nj: Elm7nj,
+						Elm7EA: Elm7EA,
+						Elm7Lx: Elm7Lx,
+						Elm7Ly: Elm7Ly,
+					})
+					.then(function (response) {
+						console.log(response);
+						document.getElementById('answer').innerHTML =
+							response.data.payload.c;
+					});
+			}
+		</script>
+	</body>
+</html>
