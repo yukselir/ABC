@@ -109,11 +109,11 @@ RHS = Ks @ us
 # print("RHS")
 # print(RHS)
 
+import random
 
 dictionary = {
-    "ks": Ks.tolist(),
-    "us": us,
-    "ps": RHS.tolist()
+    "nodes": { node.id : {"X" : node.X, "Y" : node.Y, "u": [us[node.dof[0]], us[node.dof[1]]], "p": [RHS[node.dof[0]], RHS[node.dof[1]]] } for id, node in nodes.items()},
+    "elements": {elm.id : {"n1" : elm.ni, "n2": elm.nj, "axialForce": random.uniform(0, 1) - 0.5 } for id, elm in elements.items()},
 }
 
 # dictionary = {"a" : 1 ,"b" : 2}
