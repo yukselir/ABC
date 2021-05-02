@@ -1,121 +1,99 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-	</head>
 
-	<body>
-		<div id="app">
-			<label for="fname">h:</label>
-			<input type="text" v-model="h" /><br /><br />
-			<label for="fname">dLx:</label>
-			<input type="text" v-model="dLx" /><br /><br />
-			<label for="fname">N:</label>
-			<input type="text" v-model="N" /><br /><br />
-			<input type="submit" value="Submit" @click="Solve" />
-		</div>
-		<div id = "paper"> </div>
-		<script>
-			var app = new Vue({
-				el: '#app',
-				data: function () {
-					return {
-						h: 1.5,
-						dLx: 1.0,
-						N: 3,
-						X: [1, 4, 5, 7],
-						Y: [5, -3, 5, 7],
-					};
-					elements = null;
-					nodes = null;
-					this.elements = res.data.payload.elements;
-					this.nodes = res.data.payload.nodes;
+<head>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<label for="fname">h:</label>
+		<input type="text" v-model="h" /><br /><br />
+		<label for="fname">dLx:</label>
+		<input type="text" v-model="dLx" /><br /><br />
+		<label for="fname">N:</label>
+		<input type="text" v-model="N" /><br /><br />
+		<input type="submit" value="Submit" @click="Solve" />
+		<div ref="paper"></div>
+	</div>
+
+	<script>
+
+		function drawLine(paper, x1, y1, x2, y2) {
+			var f = 70;
+			var line = paper.path(["M", x1 * f, (paper.height - f * y1) - 70, "L", f * x2, (paper.height - f * y2) - 70]);
+			return line;
+		}
+
+		var app = new Vue({
+			el: '#app',
+			data: function () {
+				return {
+					h: 1.5,
+					dLx: 1.0,
+					N: 3,
+					X: [1, 4, 5, 7],
+					Y: [5, -3, 5, 7],
+					solution: null
+				};
+				elements = null;
+				nodes = null;
+				this.elements = res.data.payload.elements;
+				this.nodes = res.data.payload.nodes;
+			},
+
+			methods: {
+				// draw : function () {
+
+				// },
+
+
+				Solve: function () {
+					var { h, dLx, N } = this;
+
+					var self = this;
+
+					axios.post('/truss2D/solve', { h, dLx, N }).then(function (res) {
+
+						console.log(self.$refs)
+
+						self.solution = res.data.payload;
+						var paper = Raphael(self.$refs.paper, 300, 200);
+						paper.setViewBox(0, 0, 300, 200);
+						paper.canvas.style.backgroundColor = '#eee';
+
+						var elements = res.data.payload.elements;
+						var nodes = res.data.payload.nodes;
+
+						Object.keys(elements).forEach(id => {
+							var elm = elements[id];
+							var n1 = nodes[elm.n1];
+							var n2 = nodes[elm.n2];
+							var X1 = parseFloat(n1.X);
+							var Y1 = parseFloat(n1.Y);
+							var X2 = parseFloat(n2.X);
+							var Y2 = parseFloat(n2.Y);
+							drawLine(paper, X1, Y1, X2, Y2);
+						});
+
+					});
 				},
 
-				methods: {
-					// draw : function () {
-						
-					// },
-					Solve: function () {
-							var { h, dLx, N } = this;
+			},
 
-							axios.post('/truss2D/solve', { h, dLx, N }).then(function (res) {
-							
-							console.log(res.data);
-							
-							// Creates canvas 500 × 500 at 200, 10
-							var paper = Raphael(200, 10, 500, 300);
-							
-							//defines first points
-							var fnodes = [100,80,130,20,160,80,190];
-
-							var k = 1;
-							for (var i = 0; i < N; i++) {
-								fnodes[0] += k*60;
-								fnodes[2] += k*60;
-								fnodes[4] += k*60;
-								var line = paper.path(`M${fnodes[0]} ${fnodes[1]} L${fnodes[2]} ${fnodes[3]} ${fnodes[4]} ${fnodes[5]} ${fnodes[0]} ${fnodes[1]}`);
-								
-								//lines[i] = paper.path("M100 80 L130 20 160 80 100 80");
-								if (i >= 0.5) {
-									var line = paper.path(`M${fnodes[2]} ${fnodes[3]} L${fnodes[6]} ${fnodes[3]}`);
-								}
-							}
-							//drawing displaced points
-							var snodes = [100,80,130,20,160,80,190];
-							this.nodes = res.data.payload.nodes;
-
-							var len = (N*2)+1;
-							us = [];
-							for (var z=1; z < len+1; z++) {
-								us[z] = nodes[z].u;
-							}
-							console.log(us[2][0]);
-							console.log(us[2][1]);
-							// var lnodes = (us[2][0]*100)+snodes[0]
-							var x = 1;
-							for (var t = 1; t < N+1; t++) {
-								snodes[0] += x*60;
-								snodes[2] += x*60;
-								snodes[4] += x*60;
-									
-								var line = paper.path(`M${snodes[0]+us[t][0]*100} ${snodes[1]-us[t][1]*100} L${snodes[2]+us[t+1+N][0]*100} ${snodes[3]-us[t+1+N][1]*100} ${snodes[4]+us[t+1][0]*100} ${snodes[5]-us[t+1][1]*100} ${snodes[0]+us[t][0]*100} ${snodes[1]-us[t][1]*100}`)
-								.attr({
-									stroke: "none",
-									stroke: "red"
-								})
-									
-								if (t >= 1.5) {
-									var line = paper.path(`M ${snodes[2]+us[N+t+1][0]*100} ${snodes[3]-us[N+t+1][1]*100} L ${snodes[6]-us[N+t][0]} ${snodes[3]-us[N+t][1]*100}`)
-									.attr({
-									stroke: "none",
-									stroke: "red"
-									})
-								}
-							}
-							// if (m === N-1) {
-   							// 		break;
-  							// 	}	
-							
-							// console.log(us);
-							// var line = paper.path(`M${snodes[0]} ${snodes[1]} L${snodes[2]} ${snodes[3]} ${snodes[4]} ${snodes[5]} ${snodes[0]} ${snodes[1]}`);
-						}); 
-					},
-					
+			watch: {
+				h: function (n, o) {
+					console.log('h:', n);
 				},
+			},
+		});
 
-				watch: {
-					h: function (n, o) {
-						console.log('h:', n);
-					},
-				},
-			});
-			
-			/*
-			var line = paper.path("M160 80 L190 20 220 80 160 80");
-			var line = paper.path("M130 20 L190 20")*/
-		</script>
-	</body>
+		/*
+		var line = paper.path("M160 80 L190 20 220 80 160 80");
+		var line = paper.path("M130 20 L190 20")*/
+	</script>
+</body>
+
 </html>
