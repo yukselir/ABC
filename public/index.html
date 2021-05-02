@@ -52,15 +52,10 @@
 
 				Solve: function () {
 					var { h, dLx, N } = this;
-
-					var self = this;
-
-					axios.post('/truss2D/solve', { h, dLx, N }).then(function (res) {
-
-						console.log(self.$refs)
-
-						self.solution = res.data.payload;
-						var paper = Raphael(self.$refs.paper, 300, 200);
+					
+					axios.post('/truss2D/solve', { h, dLx, N }).then( (res) => {
+						this.solution = res.data.payload;
+						var paper = Raphael(this.$refs.paper, 300, 200);
 						paper.setViewBox(0, 0, 300, 200);
 						paper.canvas.style.backgroundColor = '#eee';
 
