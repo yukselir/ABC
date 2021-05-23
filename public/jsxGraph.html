@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>JSXGraph template</title>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/jsxgraph@1.1.0/distrib/jsxgraph.css"
+			rel="stylesheet"
+			type="text/css"
+		/>
+		<script
+			src="https://cdn.jsdelivr.net/npm/jsxgraph@1.1.0/distrib/jsxgraphcore.js"
+			type="text/javascript"
+			charset="UTF-8"
+		></script>
+		<!-- The next line is optional: MathJax -->
+		<script
+			src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+			id="MathJax-script"
+			async
+		></script>
+	</head>
+	<body>
+		<div id="app">
+			<label for="fname">h:</label>
+			<input type="text" v-model="h" /><br /><br />
+			<label for="fname">dLx:</label>
+			<input type="text" v-model="dLx" /><br /><br />
+			<label for="fname">N:</label>
+			<input type="text" v-model="N" /><br /><br />
+			<input type="submit" value="Submit" @click="Solve" /><br /><br />
+			<div ref="paper"></div>
+			<div id="jxgbox" class="jxgbox" style="width: 500px; height: 300px"></div>
+		</div>
+
+		<script>
+			var x1 = [-2, 2];
+			var x2 = [1, 2];
+			var x3 = [3, -2];
+
+			var board = JXG.JSXGraph.initBoard('jxgbox', {
+				boundingbox: [-5, 3, 5, -3],
+			});
+			function drawLine(x1, y1, x2, y2) {
+				// var f = 70;
+				var line = board.create('line', [
+					[x1, y1],
+					[x2, y2],
+				]);
+				return line;
+			}
+			var segment = board.create('segment', [x1, x2]);
+			// function () {
+			// 	var { h, dLx, N } = this;
+
+			// 	axios.post('/truss2D/solve', { h, dLx, N }).then((res) => {
+			// 		this.solution = res.data.payload;
+			// 		var board = JXG.JSXGraph.initBoard('jxgbox', {
+			// 		boundingbox: [-5, 3, 5, -3],
+			// 		});
+			// 		// var paper = Raphael(this.$refs.paper, 300, 200);
+			// 		// paper.setViewBox(0, 0, 300, 200);
+			// 		// paper.canvas.style.backgroundColor = '#eee';
+
+			// 		var elements = res.data.payload.elements;
+			// 		var nodes = res.data.payload.nodes;
+
+			// 		Object.keys(elements).forEach((id) => {
+			// 			var elm = elements[id];
+			// 			var n1 = nodes[elm.n1];
+			// 			var n2 = nodes[elm.n2];
+			// 			var X1 = parseFloat(n1.X);
+			// 			var Y1 = parseFloat(n1.Y);
+			// 			var X2 = parseFloat(n2.X);
+			// 			var Y2 = parseFloat(n2.Y);
+			// 			drawLine(X1, Y1, X2, Y2);
+			// 		});
+			// 	});
+			// }
+
+			drawLine(x1, x2, x3);
+			// var p = board.create('point', [-2, -1]);
+			// var line1 = board.create('line', [
+			// 	[2, 1],
+			// 	[-3, 2],
+			// ]);
+		</script>
+	</body>
+</html>
